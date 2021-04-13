@@ -51,7 +51,13 @@ class RegisterActivity : AppCompatActivity() {
 
         registerUser(userName, email, password)
 
-        } }
+        }
+
+        btnLogin.setOnClickListener{
+            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
         fun registerUser(userName:String, email:String, password:String){
         auth.createUserWithEmailAndPassword(email,password)
@@ -69,6 +75,11 @@ class RegisterActivity : AppCompatActivity() {
                         databaseReference.setValue(hashMap).addOnCompleteListener(this){
                             if (it.isSuccessful){
                                 //open home activity
+                                etName.setText("")
+                                etEmail.setText("")
+                                etPassword.setText("")
+                                etConfirmPassword.setText("")
+
                                 val intent = Intent(this@RegisterActivity,HomeActivity::class.java)
                                 startActivity(intent)
                             }
