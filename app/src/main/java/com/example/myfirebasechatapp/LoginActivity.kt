@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+
 
         btnLogin.setOnClickListener{
             val email=etEmail.text.toString()
