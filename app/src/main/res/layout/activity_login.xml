@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".RegisterActivity"
+    tools:context=".activity.RegisterActivity"
     tools:ignore="MissingClass">
 
     <TextView

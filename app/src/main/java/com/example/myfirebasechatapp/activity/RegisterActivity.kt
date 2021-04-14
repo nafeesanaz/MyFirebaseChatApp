@@ -1,12 +1,12 @@
-package com.example.myfirebasechatapp
+package com.example.myfirebasechatapp.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
 import android.widget.Toast
-import com.google.firebase.auth.AuthResult
+import com.example.myfirebasechatapp.R
+import com.example.myfirebasechatapp.activity.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -80,7 +80,8 @@ class RegisterActivity : AppCompatActivity() {
                                 etPassword.setText("")
                                 etConfirmPassword.setText("")
 
-                                val intent = Intent(this@RegisterActivity,HomeActivity::class.java)
+                                val intent = Intent(this@RegisterActivity,
+                                    HomeActivity::class.java)
                                 startActivity(intent)
                             }
                         }
