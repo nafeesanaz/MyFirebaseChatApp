@@ -7,15 +7,9 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="64dp"
         android:layout_height="60dp"
         android:id="@+id/userImage"
@@ -49,11 +43,6 @@
     </LinearLayout>
 
 
-    </LinearLayout>
 
-    <view
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorDarkGray"/>
 
 </LinearLayout>

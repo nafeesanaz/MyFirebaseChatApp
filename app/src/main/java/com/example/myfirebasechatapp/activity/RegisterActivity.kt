@@ -81,7 +81,7 @@ class RegisterActivity : AppCompatActivity() {
                                 etConfirmPassword.setText("")
 
                                 val intent = Intent(this@RegisterActivity,
-                                    HomeActivity::class.java)
+                                    UsersActivity::class.java)
                                 startActivity(intent)
                             }
                         }
