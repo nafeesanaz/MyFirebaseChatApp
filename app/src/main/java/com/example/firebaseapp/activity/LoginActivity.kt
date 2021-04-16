@@ -12,11 +12,23 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    //open user screen of user logged in
+    private lateinit var firebaseUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+        firebaseUser = auth.currentUser!!
+
+        //if user logged in navigate to user screen
+        if(firebaseUser != null){
+            val intent = Intent(this@LoginActivity, UsersActivity::class.java)
+            startActivity(intent)
+
+            finish()
+
+        }
 
 
         btnLogin.setOnClickListener {
@@ -39,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
                             val intent = Intent(this@LoginActivity, UsersActivity::class.java)
 
                             startActivity(intent)
-
+                            finish()
                         }
 
                         else {
@@ -57,6 +69,8 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent (
                 this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
+
+                finish()
         }
     }
 }

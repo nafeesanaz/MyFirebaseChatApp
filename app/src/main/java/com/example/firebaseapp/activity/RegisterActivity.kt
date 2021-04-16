@@ -55,6 +55,7 @@ class RegisterActivity : AppCompatActivity() {
         btnLogin.setOnClickListener{
             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -82,6 +83,7 @@ class RegisterActivity : AppCompatActivity() {
                                 val intent = Intent(this@RegisterActivity,
                                     UsersActivity::class.java)
                                 startActivity(intent)
+                                finish()
                             }
                         }
                     }
