@@ -1,5 +1,6 @@
 package com.example.firebaseapp.activity
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -19,11 +20,12 @@ import kotlinx.android.synthetic.main.activity_users.userRecyclerView as userRec
 class UsersActivity : AppCompatActivity() {
     var userList = ArrayList<User>()
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
 
-        userRecyclerView.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false)
+        userRecyclerView.layoutManager = LinearLayoutManager( this, LinearLayout.VERTICAL, false)
 
         getUsersList()
 
@@ -44,7 +46,7 @@ class UsersActivity : AppCompatActivity() {
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val user = dataSnapShot.getValue(User::class.java)
-                    if (user!!.userId.equals(firebase.uid)) {
+                    if (!user!!.userId.equals(firebase.uid)) {
                         userList.add(user)
                     }
                 }

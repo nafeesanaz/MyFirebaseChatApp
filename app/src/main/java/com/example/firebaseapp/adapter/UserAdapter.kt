@@ -28,13 +28,13 @@ class UserAdapter (private val context: Context, private val userList:ArrayList<
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = userList[position]
         holder.txtUserName.text = user.userName
-        Glide.with(context).load(user.userImage).into(holder.imgUser)
+        Glide.with(context).load(user.userImage).placeholder(R.drawable.user).into(holder.imgUser)
     }
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
         val txtUserName:TextView = view.findViewById(R.id.userName)
         val txtTemp: TextView = view.findViewById(R.id.temp)
-        val imgUser: CircleImageView = view.findViewById(R.id.userName)
+        val imgUser: CircleImageView = view.findViewById(R.id.userImage)
 
     }
 }
