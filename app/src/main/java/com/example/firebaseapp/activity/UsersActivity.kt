@@ -1,19 +1,25 @@
 package com.example.firebaseapp.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.firebaseapp.R
 import com.example.firebaseapp.adapter.UserAdapter
 import com.example.firebaseapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_users.*
+import kotlinx.android.synthetic.main.activity_users.imgBack
+import kotlinx.android.synthetic.main.activity_users.imgProfile
 import kotlinx.android.synthetic.main.activity_users.userRecyclerView as userRecyclerView
 
 
@@ -29,6 +35,12 @@ class UsersActivity : AppCompatActivity() {
 
         imgBack.setOnClickListener{
             onBackPressed()
+        }
+
+        imgProfile.setOnClickListener{
+            val intent = Intent (
+                this@UsersActivity, ProfileActivity::class.java)
+            startActivity(intent)
         }
         getUsersList()
 
@@ -46,6 +58,13 @@ class UsersActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
+                val currentUser = snapshot.getValue(User::class.java)
+                if(currentUser!!.userImage == ""){
+                    imgProfile.setImageResource(R.drawable.user)
+                }
+                else {
+                    Glide.with(this@UsersActivity).load(currentUser.userImage).load(userImage).into(imgProfile)
+                }
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val user = dataSnapShot.getValue(User::class.java)

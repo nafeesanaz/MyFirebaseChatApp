@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.firebaseapp.activity.HomeActivity" />
+        <activity android:name="com.example.firebaseapp.activity.ProfileActivity" />
         <activity android:name="com.example.firebaseapp.activity.RegisterActivity"></activity>
     </application>
 
