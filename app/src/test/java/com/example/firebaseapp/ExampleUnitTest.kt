@@ -1,4 +1,4 @@
-package com.example.myfirebasechatapp
+package com.example.firebaseapp
 
 import org.junit.Test
 

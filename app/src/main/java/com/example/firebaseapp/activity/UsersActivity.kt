@@ -1,21 +1,19 @@
-package com.example.myfirebasechatapp.activity
+package com.example.firebaseapp.activity
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myfirebasechatapp.R
-import com.example.myfirebasechatapp.adapter.UserAdapter
-import com.example.myfirebasechatapp.model.User
+import com.example.firebaseapp.R
+import com.example.firebaseapp.adapter.UserAdapter
+import com.example.firebaseapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_users.*
-import android.widget.LinearLayout.VERTICAL as LinearLayoutVERTICAL
-import kotlinx.android.synthetic.main.activity_users.userRecyclerView as userRecyclerView1
+import kotlinx.android.synthetic.main.activity_users.userRecyclerView as userRecyclerView
 
 
 class UsersActivity : AppCompatActivity() {
@@ -25,15 +23,16 @@ class UsersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
 
-        userRecyclerView1.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false)
+        userRecyclerView.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false)
 
         getUsersList()
 
     }
 
     fun getUsersList() {
-        val firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference()
+        var firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+        val databaseReference: DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("Users")
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -51,7 +50,7 @@ class UsersActivity : AppCompatActivity() {
                 }
                 val userAdapter = UserAdapter(this@UsersActivity, userList)
 
-                userRecyclerView1.adapter = userAdapter
+                userRecyclerView.adapter = userAdapter
             }
         })
     }}

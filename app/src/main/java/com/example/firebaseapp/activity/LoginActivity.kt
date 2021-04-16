@@ -1,27 +1,25 @@
-package com.example.myfirebasechatapp.activity
+package com.example.firebaseapp.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import com.example.myfirebasechatapp.R
-import com.example.myfirebasechatapp.activity.RegisterActivity
+import com.example.firebaseapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var firebaseUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        this.setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
 
 
-        btnLogin.setOnClickListener{
+        btnLogin.setOnClickListener {
             val email=etEmail.text.toString()
             val password = etPassword.text.toString()
 

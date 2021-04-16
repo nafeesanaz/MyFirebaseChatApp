@@ -1,8 +1,8 @@
-package com.example.myfirebasechatapp.activity
+package com.example.firebaseapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myfirebasechatapp.R
+import com.example.firebaseapp.R
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
