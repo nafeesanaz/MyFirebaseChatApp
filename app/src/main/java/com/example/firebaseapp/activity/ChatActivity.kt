@@ -2,6 +2,8 @@ package com.example.firebaseapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Message
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.firebaseapp.R
 import com.example.firebaseapp.model.User
@@ -13,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_users.imgProfile
 
 class ChatActivity : AppCompatActivity() {
     var firebaseUser: FirebaseUser? = null
-    var reference: DatabaseReference? =null
+    var reference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +24,7 @@ class ChatActivity : AppCompatActivity() {
         var intent = getIntent()
         var userId = intent.getStringExtra("userId")
 
-        imgBack.setOnClickListener{
+        imgBack.setOnClickListener {
             onBackPressed()
         }
 
@@ -30,7 +32,7 @@ class ChatActivity : AppCompatActivity() {
         reference = FirebaseDatabase.getInstance().getReference("Users")
 
 
-        reference!!.addValueEventListener(object: ValueEventListener{
+        reference!!.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -38,13 +40,36 @@ class ChatActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
                 tvUserName.text = user!!.userName
-                if(user.userImage == ""){
+                if (user.userImage == "") {
                     imgProfile.setImageResource(R.drawable.user)
-                }
-                else {
+                } else {
                     Glide.with(this@ChatActivity).load(user.userImage).into(imgProfile)
                 }
             }
         })
+
+        btnSendMessage.setOnClickListener {
+            var message: String = etMessage.text.toString()
+
+            if (message.isEmpty()) {
+                Toast.makeText(applicationContext, "message is empty", Toast.LENGTH_SHORT).show()
+
+            } else {
+                sendMessage(firebaseUser!!.uid, userId.toString(), message)
+            }
+        }
+    }
+
+
+    //creating send message function
+    private fun sendMessage(senderId: String, receiverId: String, message: String) {
+        var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
+        var hashMap: HashMap<String, String> = HashMap()
+        hashMap.put("senderId", senderId)
+        hashMap.put("receiverId", receiverId)
+        hashMap.put("message", message)
+
+        reference!!.child("Chat").push().setValue(hashMap)
+
     }
 }
