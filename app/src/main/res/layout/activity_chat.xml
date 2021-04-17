@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_above="@+id/r1"
         android:layout_height="match_parent"
-        android:id="@+id/userRecyclerView" />
+        android:id="@+id/chatRecyclerView" />
 
 
     <RelativeLayout
