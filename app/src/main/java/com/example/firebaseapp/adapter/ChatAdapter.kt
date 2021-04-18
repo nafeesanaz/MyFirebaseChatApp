@@ -1,14 +1,11 @@
 package com.example.firebaseapp.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.firebaseapp.R
 import com.example.firebaseapp.activity.ChatActivity
 import com.example.firebaseapp.model.Chat
@@ -60,7 +57,7 @@ class ChatAdapter (private val context: Context, private val chatList:ArrayList<
     override fun getItemViewType(position: Int): Int {
         firebaseUser = FirebaseAuth.getInstance().currentUser
         if (chatList[position].senderId == firebaseUser!!.uid) {
-            return MESSAGE_TYPE_LEFT
+            return MESSAGE_TYPE_RIGHT
         } else {
             return MESSAGE_TYPE_LEFT
         }

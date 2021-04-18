@@ -11,19 +11,20 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
-    //open user screen of user logged in
-    private lateinit var firebaseUser: FirebaseUser
+    private var auth: FirebaseAuth? = null
+    private  var firebaseUser: FirebaseUser? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-        firebaseUser = auth.currentUser!!
+      //  firebaseUser = auth.currentUser!!
 
         //if user logged in navigate to user screen
         if(firebaseUser != null){
-            val intent = Intent(this@LoginActivity, UsersActivity::class.java)
+            val intent = Intent(this@LoginActivity,
+                    UsersActivity::class.java
+            )
             startActivity(intent)
 
             finish()
@@ -43,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             }
             else{
-                auth.signInWithEmailAndPassword(email,password)
+                auth!!.signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener(this){
                         if(it.isSuccessful) {
                             etEmail.setText("")

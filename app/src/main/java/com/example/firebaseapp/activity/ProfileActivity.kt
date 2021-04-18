@@ -34,11 +34,11 @@ class ProfileActivity : AppCompatActivity() {
                 val user = snapshot.getValue(User::class.java)
                 userName.text = user!!.userName
 
-                if(user.userImage == ""){
+                if(user.profileImage == ""){
                     userImage.setImageResource(R.drawable.user)
                 }
                 else {
-                    Glide.with(this@ProfileActivity).load(user.userImage).load(userImage).into(imgProfile)
+                    Glide.with(this@ProfileActivity).load(user.profileImage).load(userImage).into(imgProfile)
                 }
             }
 

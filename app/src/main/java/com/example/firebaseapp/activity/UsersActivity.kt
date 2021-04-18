@@ -47,7 +47,7 @@ class UsersActivity : AppCompatActivity() {
     }
 
     fun getUsersList() {
-        var firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
+        val firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
         val databaseReference: DatabaseReference =
             FirebaseDatabase.getInstance().getReference("Users")
 
@@ -59,11 +59,11 @@ class UsersActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userList.clear()
                 val currentUser = snapshot.getValue(User::class.java)
-                if(currentUser!!.userImage == ""){
+                if(currentUser!!.profileImage == ""){
                     imgProfile.setImageResource(R.drawable.user)
                 }
                 else {
-                    Glide.with(this@UsersActivity).load(currentUser.userImage).load(userImage).into(imgProfile)
+                    Glide.with(this@UsersActivity).load(currentUser.profileImage).into(imgProfile)
                 }
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {

@@ -39,15 +39,17 @@ class ChatActivity : AppCompatActivity() {
         var intent = getIntent()
         var userId = intent.getStringExtra("userId")
 
+
         imgBack.setOnClickListener {
             onBackPressed()
         }
+
 
         firebaseUser = FirebaseAuth.getInstance().currentUser
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userId!!)
 
 
-        reference!!.addValueEventListener(object : ValueEventListener {
+       reference!!.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -55,10 +57,10 @@ class ChatActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
                 tvUserName.text = user!!.userName
-                if (user.userImage == "") {
+                if (user.profileImage == "") {
                     imgProfile.setImageResource(R.drawable.user)
                 } else {
-                    Glide.with(this@ChatActivity).load(user.userImage).into(imgProfile)
+                    Glide.with(this@ChatActivity).load(user.profileImage).into(imgProfile)
                 }
             }
         })
@@ -105,8 +107,8 @@ class ChatActivity : AppCompatActivity() {
                 chatList.clear()
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val chat = dataSnapShot.getValue(Chat::class.java)
-                    if (chat!!.senderId.equals(senderId) && chat.receiverId.equals(receiverId) ||
-                        chat.senderId.equals(receiverId) && chat.receiverId.equals(senderId)
+                    if (chat!!.senderId.equals(senderId) && chat!!.receiverId.equals(receiverId) ||
+                        chat!!.senderId.equals(receiverId) && chat!!.receiverId.equals(senderId)
                     ) {
                         chatList.add(chat)
                     }
